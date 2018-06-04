@@ -26,7 +26,7 @@
     @endif
 
 
-    <form action="{{ route('products.update',$product->id) }}" method="POST">
+    <form onsubmit="return confirm('Are you sure you want to update?')" action="{{ route('products.update',$product->id) }}" method="POST">
         @csrf
         @method('PUT')
 

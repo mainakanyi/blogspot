@@ -29,7 +29,7 @@
         </tr>
         @foreach ($data as $key => $user)
             <tr>
-                <td>{{ ++$i }}</td>
+                <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
@@ -43,22 +43,19 @@
                     <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
                     <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
 
-                    {{--<form onsubmit="return confirm('Are you sure you want to delete this post?')" class="d-inline-block"--}}
-                          {{--action="{{route('users.destroy', $user->id)}}" method="post">--}}
-                        {{--@csrf--}}
-                        {{--@method('delete')--}}
-                        {{--<button type="submit" class="btn btn-danger">Delete</button>--}}
-                    {{--</form>--}}
-                    {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!}
+                    <form onsubmit="return confirm('Are you sure you want to delete this post?')" class="d-inline"
+                          action="{{route('users.destroy', $user->id)}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+
                 </td>
             </tr>
         @endforeach
     </table>
 
-
-    {!! $data->render() !!}
-
-
+    <div class="mt-4">
+        {{$data->links()}}
+    </div>
 @endsection
